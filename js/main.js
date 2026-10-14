@@ -5,6 +5,9 @@ const searchInput = document.getElementById("search-input");
 const sortSelect = document.getElementById("sort-select");
 let currentCategory = "all";
 
+const cartCount = document.getElementById("cart-count");
+let cart = JSON.parse(localStorage.getItem("sonic-cart")) || [];
+
 function renderProducts(list) {
   productList.innerHTML = "";
   productCount.textContent = "Showing " + list.length + " products";
@@ -25,13 +28,14 @@ function renderProducts(list) {
         <p><span>Brand:</span> ${product.brand}</p>
         ${discountHTML}
         <p class="price">$${product.price}</p>
-        <button>Add to Cart</button>
+        <button class="add-btn" data-id="${product.id}">Add to Cart</button>
       </div>
     `;
   });
 }
 
 renderProducts(products);
+updateCartCount();
 
 filterButtons.forEach(function (button) {
   button.addEventListener("click", function () {
@@ -85,4 +89,53 @@ function applyFilters() {
 
 sortSelect.addEventListener("change", function () {
   applyFilters();
+});
+
+function addToCart(id) {
+  const existing = cart.find(function (item) {
+    return item.id === id;
+  });
+
+  if (existing) {
+    existing.quantity = existing.quantity + 1;
+  } else {
+    cart.push({ id: id, quantity: 1 });
+  }
+
+  saveCart();
+  updateCartCount();
+}
+
+function updateCartCount() {
+  let total = 0;
+
+  cart.forEach(function (item) {
+    total = total + item.quantity;
+  });
+
+  cartCount.textContent = total;
+
+  if (total === 0) {
+    cartCount.style.display = "none";
+  } else {
+    cartCount.style.display = "inline-block";
+  }
+}
+
+function saveCart() {
+  localStorage.setItem("sonic-cart", JSON.stringify(cart));
+}
+
+productList.addEventListener("click", function (event) {
+  if (event.target.classList.contains("add-btn")) {
+    const button = event.target;
+    const id = Number(button.dataset.id);
+    addToCart(id);
+
+    button.textContent = "Added ✓";
+
+    setTimeout(function () {
+      button.textContent = "Add to Cart";
+    }, 1000);
+  }
 });
