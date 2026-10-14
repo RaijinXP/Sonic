@@ -1,6 +1,9 @@
 const productCount = document.getElementById("product-count");
 const productList = document.getElementById("product-list");
 const filterButtons = document.querySelectorAll(".filter-btn");
+const searchInput = document.getElementById("search-input");
+const sortSelect = document.getElementById("sort-select");
+let currentCategory = "all";
 
 function renderProducts(list) {
   productList.innerHTML = "";
@@ -32,19 +35,54 @@ renderProducts(products);
 
 filterButtons.forEach(function (button) {
   button.addEventListener("click", function () {
-  filterButtons.forEach(function (btn) {
-    btn.classList.remove("active");
-  });
-  button.classList.add("active");
+    filterButtons.forEach(function (btn) {
+      btn.classList.remove("active");
+    });
+    button.classList.add("active");
     const category = button.dataset.category;
 
-    if (category === "all") {
-      renderProducts(products);
-    } else {
-      const filtered = products.filter(function (product) {
-        return product.category === category;
-      });
-      renderProducts(filtered);
-    }
+    currentCategory = category;
+    applyFilters();
+      
   });
+});    
+
+
+searchInput.addEventListener("input", function () {
+  applyFilters();
+  });
+
+function applyFilters() {
+  const text = searchInput.value.toLowerCase().trim();
+
+  const results = products.filter(function (product) {
+    const matchesCategory =
+      currentCategory === "all" || product.category === currentCategory;
+    const matchesSearch = product.name.toLowerCase().includes(text);
+
+    return matchesCategory && matchesSearch;
+
+  });
+
+  const sortValue = sortSelect.value;
+
+  if (sortValue === "price-asc") {
+    results.sort(function (a, b) {
+      return a.price - b.price;
+    });
+  } else if (sortValue === "price-desc") {
+    results.sort(function (a, b) {
+      return b.price - a.price;
+    });
+  } else if (sortValue === "name-asc") {
+    results.sort(function (a, b) {
+      return a.name.localeCompare(b.name);
+    });
+  }
+
+  renderProducts(results);
+}
+
+sortSelect.addEventListener("change", function () {
+  applyFilters();
 });
