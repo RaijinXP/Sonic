@@ -31,6 +31,17 @@
 
 }
 
+.section-title{
+  display: flex;
+  justify-content: center;
+  color: blueviolet;
+}
+
+.section-title:hover{
+  color: bisque;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
 .card {
   width: 100%;
   border: 1px solid #a7b41d9d;
@@ -79,6 +90,16 @@
   display: grid;
   grid-template-columns: repeat(4,1fr);
   gap: 20px;
+}
+
+.filter-btn.active {
+  background: #111;
+  color: white;
+}
+
+.empty-message {
+  grid-column: 1 / -1;
+  text-align: center;
 }
 
 footer{

@@ -16,97 +16,18 @@
        <a href="#">Cart</a>
      </nav>
    </header>
-    <h1>Featured Products</h1>
-    <div class="product">
-      <div class="card">
-      <img
-        src="images/over-ear-headphones/headpones.png"
-          alt="Headphones"
-      />
-      <h3>Wireless Headphones</h3>
-      <p><span>Brand: </span>Sony</p>
-      <span class="discount">20% Discount</span>
-      <p class="price">$99</p>
-      <button>Add to Cart</button>
-      </div>
-      <div class="card">
-        <img
-          src="images/over-ear-headphones/headpones.png"
-          alt="Headphones"
-        />
-        <h3>Wireless Headphones</h3>
-        <p><span>Brand: </span>Sony</p>
-        <span class="discount">20% Discount</span>
-        <p class="price">$99</p>
-        <button>Add to Cart</button>
-      </div>
-      <div class="card">
-        <img
-          src="images/over-ear-headphones/Sony Wh-1000XM6.png"
-          alt="Headphones"
-        />
-        <h3>Wireless Headphones</h3>
-        <p><span>Brand: </span>Sony</p>
-        <span class="discount">20% Discount</span>
-        <p class="price">$99</p>
-        <button>Add to Cart</button>
-      </div>
-      <div class="card">
-        <img
-          src="images/over-ear-headphones/Sony Wh-1000XM6.png"
-          alt="Headphones"
-        />
-        <h3>Wireless Headphones</h3>
-        <p><span>Brand: </span>Sony</p>
-        <span class="discount">20% Discount</span>
-        <p class="price">$99</p>
-        <button>Add to Cart</button>
-      </div>
-      <div class="card">
-        <img
-          src="images/over-ear-headphones/Sony Wh-1000XM6.png"
-          alt="Headphones"
-        />
-        <h3>Wireless Headphones</h3>
-        <p><span>Brand: </span>Sony</p>
-        <span class="discount">20% Discount</span>
-        <p class="price">$99</p>
-        <button>Add to Cart</button>
-      </div>
-      <div class="card">
-        <img
-          src="images/over-ear-headphones/Sony Wh-1000XM6.png"
-          alt="Headphones"
-        />
-        <h3>Wireless Headphones</h3>
-        <p><span>Brand: </span>Sony</p>
-        <span class="discount">20% Discount</span>
-        <p class="price">$99</p>
-        <button>Add to Cart</button>
-      </div>
-      <div class="card">
-        <img
-          src="images/over-ear-headphones/Sony Wh-1000XM6.png"
-          alt="Headphones"
-        />
-        <h3>Wireless Headphones</h3>
-        <p><span>Brand: </span>Sony</p>
-        <span class="discount">20% Discount</span>
-        <p class="price">$99</p>
-        <button>Add to Cart</button>
-      </div>
-      <div class="card">
-        <img
-          src="images/over-ear-headphones/Sony Wh-1000XM6.png"
-          alt="Headphones"
-        />
-        <h3>Wireless Headphones</h3>
-        <p><span>Brand: </span>Sony</p>
-        <span class="discount">20% Discount</span>
-        <p class="price">$99</p>
-        <button>Add to Cart</button>
-      </div>
+    <h2 class="section-title">Featured Products</h2>
+    <div class="filters">
+      <button class="filter-btn active" data-category="all">All</button>
+      <button class="filter-btn" data-category="headphones">Headphones</button>
+      <button class="filter-btn" data-category="microphones">Microphones</button>
+      <button class="filter-btn" data-category="speakers">Speakers</button>
     </div>
+    <p id="product-count"></p>
+    <div class="product" id="product-list">  
+    </div>
+    <script src="js/products.js"></script>
+    <script src="js/main.js"></script>
     <footer>
       <p>© 2026 Sonic</p>
     </footer>

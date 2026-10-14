@@ -1,0 +1,32 @@
+body {
+  background: white;
+  color: black;
+  transition: background 0.3s;
+}
+
+body.dark {
+  background: #111;
+  color: white;
+  transition: background 0.3s;
+}
+
+.menu {
+  display: none;
+}
+
+.menu.open {
+  display: block;
+}
+
+.menu a {
+  display: block;
+  padding: 10px;
+}
+
+#message.error {
+  color: red;
+}
+
+#message.success {
+  color: green;
+}
