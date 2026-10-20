@@ -75,3 +75,9 @@ const products = [
   }
 ];
 
+function getFinalPrice(product) {
+  if (product.discount) {
+    return product.price * (1 - product.discount / 100);
+  }
+  return product.price;
+}

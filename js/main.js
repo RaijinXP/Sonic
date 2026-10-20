@@ -9,29 +9,34 @@ const cartCount = document.getElementById("cart-count");
 let cart = JSON.parse(localStorage.getItem("sonic-cart")) || [];
 
 function renderProducts(list) {
-  productList.innerHTML = "";
   productCount.textContent = "Showing " + list.length + " products";
+
   if (list.length === 0) {
-      productList.innerHTML = `<p class="empty-message">No products found.</p>`;
+    productList.innerHTML = `<p class="empty-message">No products found.</p>`;
     return;
-    }
+  }
+
+  let html = "";
+
   list.forEach(function (product) {
     let discountHTML = "";
     if (product.discount) {
       discountHTML = `<span class="discount">${product.discount}% Discount</span>`;
     }
-    
-    productList.innerHTML += `
+
+    html += `
       <div class="card">
         <img src="${product.image}" alt="${product.name}" />
         <h3>${product.name}</h3>
         <p><span>Brand:</span> ${product.brand}</p>
         ${discountHTML}
-        <p class="price">$${product.price}</p>
+        <p class="price">$${getFinalPrice(product).toFixed(2)}</p>
         <button class="add-btn" data-id="${product.id}">Add to Cart</button>
       </div>
     `;
   });
+
+  productList.innerHTML = html;
 }
 
 renderProducts(products);
@@ -72,11 +77,11 @@ function applyFilters() {
 
   if (sortValue === "price-asc") {
     results.sort(function (a, b) {
-      return a.price - b.price;
+      return getFinalPrice(a) - getFinalPrice(b);
     });
   } else if (sortValue === "price-desc") {
     results.sort(function (a, b) {
-      return b.price - a.price;
+      return getFinalPrice(b) - getFinalPrice(a);
     });
   } else if (sortValue === "name-asc") {
     results.sort(function (a, b) {
