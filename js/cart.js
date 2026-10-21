@@ -1,14 +1,21 @@
 const cartItems = document.getElementById("cart-items");
 const cartTotal = document.getElementById("cart-total");
+const cartCount = document.getElementById("cart-count");
+const clearBtn = document.getElementById("clear-cart");
 
 let cart = JSON.parse(localStorage.getItem("sonic-cart")) || [];
 
 function renderCart() {
+  updateCartCount();
+
   if (cart.length === 0) {
     cartItems.innerHTML = `<p class="empty-message">Your cart is empty.</p>`;
     cartTotal.textContent = "";
+    clearBtn.style.display = "none";
     return;
   }
+
+  clearBtn.style.display = "block";
 
   let total = 0;
   let html = "";
@@ -75,8 +82,34 @@ cartItems.addEventListener("click", function (event) {
   renderCart();
 });
 
+function updateCartCount() {
+  let total = 0;
+
+  cart.forEach(function (item) {
+    total = total + item.quantity;
+  });
+
+  cartCount.textContent = total;
+
+  if (total === 0) {
+    cartCount.style.display = "none";
+  } else {
+    cartCount.style.display = "inline-block";
+  }
+}
+
+clearBtn.addEventListener("click", function () {
+  cart = [];
+  
+  saveCart();
+  renderCart();
+
+});
+
 function saveCart() {
    localStorage.setItem("sonic-cart", JSON.stringify(cart));
 }
+
+
 
 renderCart();
